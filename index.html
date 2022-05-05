@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head dir="ltr">
+<meta charset="utf-8" lang="en">
+<title>patatap clone</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Load the Paper.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js" referrerpolicy="no-referrer"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script defer type="text/paperscript" canvas="myCanvas">
+var cir=[];
+var rec=[];
+var poly=[];
+function onKeyDown(event){
+	var path = new Path.Circle({
+		center: view.size*Point.random(),
+		radius: 600,
+		fillColor: new Color(Math.random(),Math.random(),Math.random())
+	});
+	cir.push(path);
+	var rectangle = new Path.Rectangle({
+		point: view.size*Point.random(),
+		size: [600, 600],
+		fillColor: new Color(Math.random(),Math.random(),Math.random())
+	});
+	rec.push(rectangle);
+
+	var polygon = new Path.RegularPolygon(view.size*Point.random(),Math.trunc(Math.random()*7+1) , 500);
+	polygon.fillColor = new Color(Math.random(),Math.random(),Math.random());
+	poly.push(polygon);
+}
+function onFrame(event) {
+	for(var i=0;i<cir.length;i++){
+		cir[i].fillColor.hue+=6;
+		cir[i].scale(.9);
+		rec[i].fillColor.hue+=6;
+		rec[i].rotate(8);
+		rec[i].scale(.9);
+		poly[i].fillColor.hue+=6;
+		poly[i].rotate(8);
+		poly[i].scale(.9);
+	}
+
+
+	// path.fillColor.hue += 1;
+	// path.scale(.9);
+}
+
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+  <script type="text/javascript" src='script.js'></script>
+
+</body>
+</html>
